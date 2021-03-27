@@ -55,13 +55,13 @@ class Board(tk.Tk):
 
             if self.is_valid(i, (row, col)):
                 self.after(100)
-                self.slots[row][col].configure(text=i, background="red")
+                self.slots[row][col].config(text=i, background="green")
                 self.update()
 
                 if self.solve(None):
                     return True
 
-                self.slots[row][col].configure(text="")
+                self.slots[row][col].config(text="", background="red")
                 self.update()
 
         return False
