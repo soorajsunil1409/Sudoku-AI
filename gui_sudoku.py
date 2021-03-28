@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import messagebox
 from threading import Thread
 import time
 
@@ -45,6 +45,11 @@ class Board(tk.Tk):
         self.mainloop()
 
     def solve(self, e):
+        if not self.selected:
+            selection = messagebox.askyesno(title="Visualisation", message="Do you you wish to see visually?")
+            self.selected = True
+            self.visual = selection
+            
         find = self.find_empty()
         if not find:
             return True
@@ -54,7 +59,8 @@ class Board(tk.Tk):
         for i in range(1, 10):
 
             if self.is_valid(i, (row, col)):
-                self.after(100)
+                if self.visual:
+                    self.after(100)
                 self.slots[row][col].config(text=i, background="green")
                 self.update()
 
